@@ -14,6 +14,7 @@ class Node():
 	def left(self, value):
 		self._left = value
 
+	@property
 	def left(self):
 		return self._left
 
@@ -21,6 +22,7 @@ class Node():
 	def right(self, value):
 		self._right = value
 
+	@property
 	def right(self):
 		return self._right
 
