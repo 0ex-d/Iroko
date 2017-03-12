@@ -36,11 +36,32 @@ class Tree():
 		self._root = None
 		self._key = key
 
-	def _insert(self, value):
-		pass
+	def _insert(self, node, subtree):
+        if node.key <= subtree.key:
+            if subtree.left is None:
+                subtree.left = node
+            else:
+                self._insert(node, subtree.left)
+        else:
+            if subtree.right is None:
+                subtree.right = node
+            else:
+                self._insert(node, subtree.right)
 
-	def insert(self, subtree):
-		pass
+    def insert(self, value):
+        node = Node(self._key(value), value)
+        if self._root is None:
+            self._root = node
+        else:
+            self._insert(node, self._root)
+
+def _prepare_data():
+	return (0, 1, 2, 3, 4, 5, 6, 7)
 
 if __name__ == "__main__":
-	pass
+	data = _prepare_data()
+
+	tree = Tree(lambda x: x)
+	
+	for item in data:
+		tree.insert(item)
