@@ -3,6 +3,11 @@ Binary Tree
 March 09, 2017
 '''
 
+#!/usr/bin/env python3
+
+import random
+import subprocess
+
 class Node():
 	def __init__(self, key, value):
 		self.key = key
