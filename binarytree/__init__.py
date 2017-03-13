@@ -55,6 +55,32 @@ class Tree():
         else:
             self._insert(node, self._root)
 
+    def _get_dot(self, node):
+        if node.left is not None:
+            yield "\t%s -> %s;" % (node.key, node.left.key)
+            for i in self._get_dot(node.left):
+                yield i
+        elif node.right is not None:
+            r = random.randint(0, 1e9)
+            yield "\tnull%s [shape=point];" % r
+            yield "\t%s -> null%s;" % (node.key, r)
+        if node.right is not None:
+            yield "\t%s -> %s;" % (node.key, node.right.key)
+            for i in self._get_dot(node.right):
+                yield i
+        elif node.left is not None:
+            r = random.randint(0, 1e9)
+            yield "\tnull%s [shape=point];" % r
+            yield "\t%s -> null%s;" % (node.key, r)
+
+    def get_dot(self):
+        return "digraph G{\n%s}" % ("" if self._root is None else (
+            "\t%s;\n%s\n" % (
+                self._root.key,
+                "\n".join(self._get_dot(self._root))
+            )
+        ))
+
 def _prepare_data():
 	return (0, 1, 2, 3, 4, 5, 6, 7)
 
