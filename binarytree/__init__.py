@@ -55,6 +55,30 @@ class Tree():
         else:
             self._insert(node, self._root)
 
+    def _balance(self, subtree, element_list):
+        if not element_list:
+            return
+        right_list_length = len(element_list)/2
+        value = element_list[right_list_length]
+        node = Node(self._key(value), value)
+        self._insert(node, subtree)
+        self._balance(node, element_list[:right_list_length])
+        self._balance(node, element_list[right_list_length+1:])
+
+    def balance(self):
+        sorted_elements = list(self._left_to_right(self._root))
+
+        if not sorted_elements:
+            self._root = None
+            return
+
+        right_list_length = len(sorted_elements)/2
+        value = sorted_elements[right_list_length]
+        node = Node(self._key(value), value)
+        self._root = node
+        self._balance(node, sorted_elements[:right_list_length])
+        self._balance(node, sorted_elements[right_list_length+1:])
+
     def _get_dot(self, node):
         if node.left is not None:
             yield "\t%s -> %s;" % (node.key, node.left.key)
