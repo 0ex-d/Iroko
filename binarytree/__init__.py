@@ -112,6 +112,12 @@ if __name__ == "__main__":
 	data = _prepare_data()
 
 	tree = Tree(lambda x: x)
-	
-	for item in data:
-		tree.insert(item)
+
+    # insert elements into space
+    for item in data:
+        tree.insert(item)
+
+    # Balance the tree
+    tree.balance()
+
+    point = tree.get_dot()
