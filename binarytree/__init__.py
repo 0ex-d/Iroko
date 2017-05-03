@@ -9,11 +9,11 @@ import random
 import subprocess
 
 class Node():
-	def __init__(self, key, value):
-		self.key = key
-		self.value =  value
-		self._left = None
-		self._right = None
+    def __init__(self, key, value):
+        self.key = key
+        self.value =  value
+        self._left = None
+        self._right = None
 
 	@property
 	def left(self):
@@ -32,11 +32,11 @@ class Node():
 		self._right = value
 
 class Tree():
-	def __init__(self, key=lambda x: id(x)):
-		self._root = None
-		self._key = key
+    def __init__(self, key=lambda x: id(x)):
+        self._root = None
+        self._key = key
 
-	def _insert(self, node, subtree):
+    def _insert(self, node, subtree):
         if node.key <= subtree.key:
             if subtree.left is None:
                 subtree.left = node
@@ -109,9 +109,9 @@ def _prepare_data():
 	return (0, 1, 2, 3, 4, 5, 6, 7)
 
 if __name__ == "__main__":
-	data = _prepare_data()
+    data = _prepare_data()
 
-	tree = Tree(lambda x: x)
+    tree = Tree(lambda x: x)
 
     # insert elements into space
     for item in data:
