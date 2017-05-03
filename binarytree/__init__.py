@@ -121,3 +121,6 @@ if __name__ == "__main__":
     tree.balance()
 
     point = tree.get_dot()
+
+    pickle = subprocess.Popen(["dot", "-Tpng"], stdin=subprocess.PIPE)
+    pickle.communicate(point)
