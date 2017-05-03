@@ -8,30 +8,30 @@ March 09, 2017
 import random
 import subprocess
 
-class Node():
+class Node(object):
     def __init__(self, key, value):
         self.key = key
-        self.value =  value
+        self.value = value
         self._left = None
         self._right = None
 
-	@property
-	def left(self):
-		return self._left
+    @property
+    def right(self):
+        return self._right
 
-	@left.setter
-	def left(self, value):
-		self._left = value
+    @right.setter
+    def right(self, value):
+        self._right = value
 
-	@property
-	def right(self):
-		return self._right
+    @property
+    def left(self):
+        return self._left
 
-	@right.setter
-	def right(self, value):
-		self._right = value
+    @left.setter
+    def left(self, value):
+        self._left = value
 
-class Tree():
+class Tree(object):
     def __init__(self, key=lambda x: id(x)):
         self._root = None
         self._key = key
@@ -54,6 +54,18 @@ class Tree():
             self._root = node
         else:
             self._insert(node, self._root)
+
+    def _left_to_right(self, subtree):
+        if subtree is None:
+            return
+
+        for i in self._left_to_right(subtree.left):
+            yield i
+
+        yield subtree.value
+
+        for i in self._left_to_right(subtree.right):
+            yield i
 
     def _balance(self, subtree, element_list):
         if not element_list:
